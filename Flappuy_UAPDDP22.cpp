@@ -1,7 +1,7 @@
 //Nama Anggota:
 //Suntan Jundi Khalid 2217051021
 //Intan Purnama Sari  2217051050
-//Rimbajati Dwi Djatmiko 2217051069
+//Rimba Jati Dwi Djatmiko 2217051069
 
 #include <iostream>//untuk menggunakan cin dan cout
 #include <time.h>//untuk mendefinisikan waktu
