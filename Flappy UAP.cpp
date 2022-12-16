@@ -1,7 +1,7 @@
 //Nama Anggota:
 //Suntan Jundi Khalid 2217051021
 //Intan Purnama Sari 2217051050
-//Rimbajati Dwi Djatmiko 2217051069
+//Rimba Jati Dwi Djatmiko 2217051069
 
 #include <iostream>//untuk menggunakan cin dan cout
 #include <time.h>//untuk mendefinisikan waktu
@@ -36,4 +36,102 @@ void loading(){//menampilkan scene loading
 	}
 	system("cls");
 	
+}
+int play(){
+	srand(time(0));//untuk membuat program merandom
+	char mv;//untuk mengerakan burung
+	char ulang='y';//untuk melakukan repeat apabila kita menekan y
+	int highscore=0;//untuk skor tertinggi
+    while (ulang =='y'){//perulangan agar bermain kembali ketika repeat sama dengan y
+    int score=0;//perhitungan skor
+    bool wasit=true;
+    int x=9; //posisi awal burung
+    int pipay[5]; // rintangan sumbu y
+    int pipax[5]; // rintangan sumbu x
+    pipax[0]=10; //rintangan 1 akan muncul pada kolom 10
+    pipax[1]=18; //rintangan 2 akan muncul pada kolom 18
+	pipax[2]=27; //rintangan 3 akan muncul pada kolom 27
+    for (int i=0;i<3;i++){
+    	pipay[i]=(rand()-1)%12+2;//random pipa sumbu y
+	}
+	string map[20][30]; // membuat map
+    for (int i=0;i<20;i++){
+        for (int j=0;j<30;j++){
+            if ( i==0 || i==19 || j==0 || j==29){ //mengoutput batasan dari window 
+                map[i][j]="# ";
+            }
+            else{
+                map[i][j]="  ";
+            }
+        }
+    }
+	while (wasit == true){
+        for (int i =0;i<3;i++){
+            for (int j=1;j<19;j++){
+                map[j][pipax[i]]="  ";
+            }
+        }
+        for (int i=0;i<3;i++){ //membuat rintangan bergerak ke kiri
+            pipax[i]--;
+        }
+        for (int i =0;i<3;i++){ //membuat rintangan muncul kembali dari kanan setelah rintangan melewati kolom ketiga
+            for (int j=1;j<19;j++){
+                map[j][pipax[i]]="* ";
+            }
+        }
+        for (int i=0;i<3;i++){ //membuat jarak antara pipa atas dan pipa bawah
+            map[pipay[i]][pipax[i]]="  ";
+            map[pipay[i]+1][pipax[i]]="  ";
+            map[pipay[i]+2][pipax[i]]="  ";
+            map[pipay[i]+3][pipax[i]]="  ";
+            map[pipay[i]+4][pipax[i]]="  ";
+        }
+        for (int i=0;i<3;i++){
+            if (pipax[i]==1){
+				pipax[i]=28;
+                pipay[i]=(rand()-1)%12+2;
+                }
+        }
+        map[x][3]="  ";
+        if (kbhit()){//kbhit memeriksa konsol untuk penekanan tombol terbaru
+            mv=getch();
+            x=x-3;
+        }
+        x++;
+        if(x<1){
+            x=1;
+        }
+        for (int i=0;i<3;i++){//perhitungan skor
+            if (pipax[i]==3){
+                if (map[x][3]=="  "){//perhitungan skor untuk setiap melewati rintangan
+                    score=score+1;
+                }
+                if (map[x][3]=="* "){//ketika burung menabrak "*" maka game over
+                    wasit=false;
+                }
+            }
+        }
+        map[x][3]="> "; //burung, dimana diposisikan pada x = 9, yaitu baris ke 9 dan kolom ketiga
+        for (int i=1;i<19;i++){
+            map[i][1]="  ";
+        }
+        for (int i=0;i<20;i++){
+            for (int j=0;j<30;j++){
+                cout << map[i][j];
+            }
+        cout <<endl;
+        }
+		cout << "Score = "<<score;//menampilkan skor
+        Sleep (100);
+    	system ("cls");
+	}
+	gotoxy(45, 12); cout << "GAME OVER" << endl;
+	gotoxy(45, 13); cout << "Score : " << score <<endl;
+    if (highscore<score){
+        highscore=score;
+    }
+    gotoxy(45, 14); cout << "Highscore : "<< highscore <<endl;
+    gotoxy(45, 15); cout << "Main Lagi?(y/n) : "; cin >> ulang;
+	if(ulang == 'n') exit(0);
+}
 }
