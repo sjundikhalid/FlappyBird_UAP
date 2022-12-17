@@ -135,3 +135,50 @@ int play(){
 	if(ulang == 'n') exit(0);
 }
 }
+void logo(){//biar gokil, sama intruksi juga
+	gotoxy(70, 10); cout << "   _vv__" << endl;
+	gotoxy(70, 11); cout << "  (    0)>" << endl;
+	gotoxy(70, 12); cout << "<(_/_/_/)" << endl;
+	gotoxy(60, 2); cout << "   _vv__" << endl;
+	gotoxy(60, 3); cout << "  (    0)>" << endl;
+	gotoxy(60, 4); cout << "<(_/_/_/)" << endl;
+	gotoxy(60, 20); cout << "   _vv__" << endl;
+	gotoxy(60, 21); cout << "  (    0)>" << endl;
+	gotoxy(60, 22); cout << "<(_/_/_/)" << endl;
+	gotoxy(85, 5); cout << "   _vv__" << endl;
+	gotoxy(85, 6); cout << "  (    0)>" << endl;
+	gotoxy(85, 7); cout << "<(_/_/_/)" << endl;
+	gotoxy(85, 16); cout << "   _vv__" << endl;
+	gotoxy(85, 17); cout << "  (    0)>" << endl;
+	gotoxy(85, 18); cout << "<(_/_/_/)" << endl;
+	gotoxy(95, 10); cout << "   _vv__" << endl;
+	gotoxy(95, 11); cout << "  (    0)>" << endl;
+	gotoxy(95, 12); cout << "<(_/_/_/)" << endl;
+	gotoxy(2, 2); cout << "Cara Main : " << endl;
+	gotoxy(2, 3); cout << "Hindari rintangan dengan menekan apapun" << endl;
+	gotoxy(2, 5); cout << "SELAMAT BERMAIN!";
+}
+void menu(){
+	do{
+		system("cls");
+		loading();
+		logo();
+		gotoxy(47,12); cout << "Silahkan Pilih";
+		gotoxy(47,13); cout<< "1. Bermain";	 
+		gotoxy(47,14); cout<< "2. Keluar";
+		gotoxy(47,15); cout<< "Pilihan : ";
+		char opt = getche();
+		//getche fungsinya sama dengan getch bedanya dapat menampilkan karakter yang diinput
+		//option
+		if( opt =='1') play();
+//		//jika menjawab 1 maka bermain
+		else if( opt =='2') exit(0);
+		//jika 2 maka exit atau memberhentikan program secara paksa/manual
+		
+	}while(true);	
+	//while true
+}
+int main(){
+	menu();
+	getch();
+}
